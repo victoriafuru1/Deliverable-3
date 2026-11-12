@@ -12,4 +12,11 @@ class Battle:
 
     def simulate_battle(self): 
         while self.enemy.is_alive and self.hero.is_alive:
-            self.play_round
+            self.play_round()
+
+        if self.hero.is_alive:
+            print("The Hero won!")
+            return self.hero
+        else:
+            print("The enemy won!")
+            return self.enemy
