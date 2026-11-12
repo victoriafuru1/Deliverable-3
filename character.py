@@ -78,10 +78,13 @@ class Mage(Character):
 
     def attack(self, target):
         if self.mana >= 10: 
+            self.mana -= 10
             magic_damage = self.damage * 2
 
             target.take_damage(magic_damage)
-        return super().attack(target)
+        else:
+            self.mana += 5
+            super().attack(target)
     
 
         
