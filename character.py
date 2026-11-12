@@ -70,3 +70,18 @@ class Warrior(Character):
         armour_damage = max(armour_damage, 0)
         super().take_damage(armour_damage)
 
+class Mage(Character):
+    def __init__(self, name, hp_max = 100, damage = 10, weapon = None, mana: int = 30, mana_max: int = 30):
+        super().__init__(name, hp_max, damage, weapon)
+        self.mana = mana 
+        self.mana_max = mana_max
+
+    def attack(self, target):
+        if self.mana >= 10: 
+            magic_damage = self.damage * 2
+
+            target.take_damage(magic_damage)
+        return super().attack(target)
+    
+
+        
