@@ -10,9 +10,15 @@ class Battle:
         if self.enemy.is_alive:
             self.enemy.attack(self.hero)
 
-    def simulate_battle(self): 
+    def simulate_battle(self):
+        round_nr = 1
+
         while self.enemy.is_alive and self.hero.is_alive:
+            print(f"Round number{round_nr}")
             self.play_round()
+            print(self.hero)
+            print(self.enemy)
+            round_nr += 1
 
         if self.hero.is_alive:
             print("The Hero won!")
