@@ -1,5 +1,6 @@
 
-from items import Weapon 
+from items import Weapon
+
 
 class Character:
     """Represents a character in the RPG"""
@@ -24,7 +25,12 @@ class Character:
 
     def attack(self, target) -> None:
         """Attack and deal damage to target character"""
-        target.take_damage(self.damage)
+        if self.weapon is not None: 
+            dmg = self.weapon.roll_damage()
+        else: 
+            dmg = self.damage
+        
+        target.take_damage(dmg)
 
     def heal(self, amount: int) -> None:
         """ Let character heal. """
