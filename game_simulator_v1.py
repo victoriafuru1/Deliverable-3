@@ -15,13 +15,17 @@ class Character:
         self.hp_max = hp_max
         self.damage = damage
 
-    def take_damage(self, amount: int): 
+    def take_damage(self, amount: int) -> None: 
         self._hp -= amount
         self._hp = max(self._hp, 0)
 
     def attack(self, target) -> None:
         """Attack and deal damage to target character"""
         target.take_damage(self.damage)
+
+    def heal(self, amount: int) -> None:
+        self._hp += amount
+        self._hp = min(self._hp, self.hp_max)
 
     def introduce(self) -> None:
         """Creates string that introduces character"""
