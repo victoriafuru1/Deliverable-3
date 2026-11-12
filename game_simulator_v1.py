@@ -15,7 +15,8 @@ class Character:
         self.hp_max = hp_max
         self.damage = damage
 
-    def take_damage(self, amount: int) -> None: 
+    def take_damage(self, amount: int) -> None:
+        """Reduce the characters own HP without going under 0.""" 
         self._hp -= amount
         self._hp = max(self._hp, 0)
 
@@ -24,6 +25,7 @@ class Character:
         target.take_damage(self.damage)
 
     def heal(self, amount: int) -> None:
+        """ Let character heal. """
         self._hp += amount
         self._hp = min(self._hp, self.hp_max)
 
@@ -44,3 +46,9 @@ class Character:
         """Public read-only property to inspect HP without allowing direct, unsafe
         edits."""
         return self._hp
+
+    @property
+    def is_alive(self) -> bool: 
+        return self._hp > 0
+           
+    
