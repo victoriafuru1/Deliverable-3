@@ -15,11 +15,14 @@ class Character:
         self.hp_max = hp_max
         self.damage = damage
 
+    def take_damage(self, amount: int): 
+        self._hp -= amount
+        self._hp = max(self._hp, 0)
+
     def attack(self, target) -> None:
         """Attack and deal damage to target character"""
-        target._hp -= self.damage
-        target._hp = max(target._hp, 0) # Target hp cannot end up lower than 0
-    
+        target.take_damage(self.damage)
+
     def introduce(self) -> None:
         """Creates string that introduces character"""
         print(f"Hi, my name is {self.name}!")
@@ -27,7 +30,7 @@ class Character:
     def __repr__(self) -> str:
         """Representation of character object"""
         return f"<Character name={self.name} hp={self.hp} damage={self.damage}>)"
-
+    
     def __str__(self) -> str:
         """String representation of character object"""
         return f"Character: {self.name} with {self.hp} HP and {self.damage} damage"
@@ -35,5 +38,5 @@ class Character:
     @property
     def hp(self) -> int:
         """Public read-only property to inspect HP without allowing direct, unsafe
-    edits."""
+        edits."""
         return self._hp
