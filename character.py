@@ -42,7 +42,7 @@ class Character:
         print(f"Hi, my name is {self.name}!")
 
     def __repr__(self) -> str:
-        """Representation of character object"""
+        """Representation of character object."""
         return f"<Character name={self.name} hp={self.hp} damage={self.damage}>)"
     
     def __str__(self) -> str:
@@ -59,4 +59,14 @@ class Character:
     def is_alive(self) -> bool: 
         return self._hp > 0
            
-    
+
+class Warrior(Character):
+    def __init__(self, name, hp_max = 100, damage = 10, weapon = None, armour: int = 5):
+        super().__init__(name, hp_max, damage, weapon)
+        self.armour = armour
+
+    def take_damage(self, amount: int) -> None:
+        armour_damage = amount - self.armour
+        armour_damage = max(armour_damage, 0)
+        super().take_damage(armour_damage)
+
