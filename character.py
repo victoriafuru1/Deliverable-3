@@ -70,6 +70,11 @@ class Warrior(Character):
         armour_damage = max(armour_damage, 0)
         super().take_damage(armour_damage)
 
+    def __str__(self) -> str:
+        return f"{super().__str__()} | Armour: {self.armour}"
+
+    
+
 class Mage(Character):
     def __init__(self, name, hp_max = 100, damage = 10, weapon = None, mana: int = 30, mana_max: int = 30):
         super().__init__(name, hp_max, damage, weapon)
@@ -80,11 +85,16 @@ class Mage(Character):
         if self.mana >= 10: 
             self.mana -= 10
             magic_damage = self.damage * 2
+            print(f"{self.name} attacks with magic!")
 
             target.take_damage(magic_damage)
         else:
             self.mana += 5
+            print(f"{self.name} attacks with weapon and restores 5 mana")
             super().attack(target)
+
+    def __str__(self) -> str:
+            return f"{super().__str__()} | Mana: {self.mana}/{self.mana_max}"
     
 
         
