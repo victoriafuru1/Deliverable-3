@@ -7,13 +7,14 @@ class Character:
     def __init__(self, name: str, hp_max: int = 100, damage: int = 10, weapon: Weapon | None = None) -> None:
         """
         Initialise the Character
+        
         Args:
         name (str): The name of the character.
         hp_max (int): Max hit points (default = 100)
         damage (int): Damage delt when character attacks (default = 10)
         """
         self.name = name
-        self._hp = hp_max # Note: _hp indicated private attribute
+        self._hp = hp_max  # Note: _hp indicated private attribute
         self.hp_max = hp_max
         self.damage = damage
         self.weapon = weapon 
@@ -33,7 +34,7 @@ class Character:
         target.take_damage(dmg)
 
     def heal(self, amount: int) -> None:
-        """ Let character heal. """
+        """Let character heal."""
         self._hp += amount
         self._hp = min(self._hp, self.hp_max)
 
@@ -56,16 +57,18 @@ class Character:
         return self._hp
 
     @property
-    def is_alive(self) -> bool: 
+    def is_alive(self) -> bool:
+        """Check if character is alive."""
         return self._hp > 0
            
 
 class Warrior(Character):
-    def __init__(self, name, hp_max = 100, damage = 10, weapon = None, armour: int = 5):
+    def __init__(self, name, hp_max=100, damage=10, weapon=None, armour: int = 5):
         super().__init__(name, hp_max, damage, weapon)
         self.armour = armour
 
     def take_damage(self, amount: int) -> None:
+        """ Armour makes character take less damage"""
         armour_damage = amount - self.armour
         armour_damage = max(armour_damage, 0)
         super().take_damage(armour_damage)
@@ -73,10 +76,9 @@ class Warrior(Character):
     def __str__(self) -> str:
         return f"{super().__str__()} | Armour: {self.armour}"
 
-    
 
 class Mage(Character):
-    def __init__(self, name, hp_max = 100, damage = 10, weapon = None, mana: int = 30, mana_max: int = 30):
+    def __init__(self, name, hp_max=100, damage=10, weapon=None, mana: int = 30, mana_max: int = 30):
         super().__init__(name, hp_max, damage, weapon)
         self.mana = mana 
         self.mana_max = mana_max
@@ -94,7 +96,4 @@ class Mage(Character):
             super().attack(target)
 
     def __str__(self) -> str:
-            return f"{super().__str__()} | Mana: {self.mana}/{self.mana_max}"
-    
-
-        
+        return f"{super().__str__()} | Mana: {self.mana}/{self.mana_max}"
